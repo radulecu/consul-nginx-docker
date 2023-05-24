@@ -1,0 +1,25 @@
+{
+  "datacenter": "DC1",
+  "node_name": "consul_agent_nginx",
+  "bind_addr": "0.0.0.0",
+  "client_addr": "0.0.0.0",
+  "log_level": "ERROR",
+  "check_update_interval": "1m",
+  "enable_script_checks": true,
+  "ca_file": "/etc/nginx/tls/ca.crt",
+  "cert_file": "/etc/nginx/tls/consul.crt",
+  "key_file": "/etc/nginx/tls/consul.key",
+  "leave_on_terminate" : true,
+  "retry_interval" : "5s",
+  "retry_join" : [
+    "consul-server-1:8301",
+    "consul-server-2:8301",
+    "consul-server-3:8301",
+    "nginx:8301"
+  ],
+  "server_name" : "consul_agent_nginx.test",
+  "skip_leave_on_interrupt" : true,
+  "node_meta": {
+    "instance_type": "Docker container"
+  }
+}

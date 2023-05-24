@@ -1,0 +1,81 @@
+alive: consul_agent_nginx 192.168.172.14:8301
+alive: consul-server-2 192.168.172.12:8301
+clock: 1
+alive: consul-server-1 192.168.172.11:8301
+alive: consul-server-3 192.168.172.13:8301
+clock: 3
+clock: 4
+event-clock: 1
+alive: consul_agent_nginx 192.168.172.14:8301
+alive: consul-server-1 192.168.172.11:8301
+alive: consul-server-2 192.168.172.12:8301
+alive: consul-server-3 192.168.172.13:8301
+clock: 5
+alive: consul_agent_nginx 192.168.172.14:8301
+alive: consul-server-2 192.168.172.12:8301
+alive: consul-server-3 192.168.172.13:8301
+alive: consul-server-1 192.168.172.11:8301
+clock: 6
+alive: consul_agent_nginx 192.168.172.14:8301
+alive: consul-server-3 192.168.172.13:8301
+alive: consul_agent_nginx 192.168.172.14:8301
+alive: consul-server-2 192.168.172.12:8301
+clock: 10
+alive: consul-server-1 192.168.172.11:8301
+clock: 11
+clock: 12
+alive: consul-server-3 192.168.172.13:8301
+clock: 13
+clock: 15
+event-clock: 4
+alive: consul_agent_nginx 192.168.172.14:8301
+alive: consul-server-1 192.168.172.11:8301
+alive: consul-server-3 192.168.172.13:8301
+alive: consul-server-2 192.168.172.12:8301
+clock: 19
+clock: 20
+alive: consul_agent_nginx 192.168.172.14:8301
+alive: consul_agent_nginx 192.168.172.14:8301
+alive: consul_agent_nginx 192.168.172.14:8301
+alive: consul_agent_nginx 192.168.172.14:8301
+alive: consul_agent_nginx 192.168.172.14:8301
+alive: consul_agent_nginx 192.168.172.14:8301
+alive: consul_agent_nginx 192.168.172.14:8301
+alive: consul_agent_nginx 192.168.172.14:8301
+alive: consul_agent_nginx 192.168.172.14:8301
+alive: consul-server-1 192.168.172.11:8301
+alive: consul-server-2 192.168.172.12:8301
+clock: 29
+clock: 30
+clock: 33
+clock: 35
+clock: 37
+clock: 39
+clock: 40
+alive: consul_agent_nginx 192.168.172.14:8301
+alive: consul_agent_nginx 192.168.172.14:8301
+alive: consul_agent_nginx 192.168.172.14:8301
+alive: consul_agent_nginx 192.168.172.14:8301
+alive: consul_agent_nginx 192.168.172.14:8301
+alive: consul_agent_nginx 192.168.172.14:8301
+alive: consul_agent_nginx 192.168.172.14:8301
+alive: consul_agent_nginx 192.168.172.14:8301
+alive: consul_agent_nginx 192.168.172.14:8301
+alive: consul-server-1 192.168.172.11:8301
+alive: consul-server-2 192.168.172.12:8301
+alive: consul-server-3 192.168.172.13:8301
+clock: 55
+clock: 56
+event-clock: 8
+not-alive: consul-server-3
+clock: 57
+not-alive: consul-server-1
+clock: 58
+clock: 59
+alive: consul_agent_nginx 192.168.172.14:8301
+alive: consul-server-3 192.168.172.13:8301
+clock: 61
+alive: consul-server-2 192.168.172.12:8301
+alive: consul-server-1 192.168.172.11:8301
+clock: 63
+event-clock: 9

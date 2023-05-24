@@ -1,0 +1,105 @@
+version: '3'
+
+services:
+  nginxLB:
+    image: nginx:latest
+    container_name: nginxLB
+    restart: always
+    ports:
+      - 443:443
+      - 80:80
+    command:
+      - /bin/bash
+      - -c
+      - |
+        service nginx start 
+        while true ; do sleep 100; done;
+    networks:
+      consul:
+        ipv4_address: 192.168.172.12
+    volumes:
+      - /home/radu/IdeaProjects/nginx-consul/nginxLbTest/nginx_load_balancer/opt/nginx/nginx.conf:/etc/nginx/nginx.conf
+      - /home/radu/IdeaProjects/nginx-consul/nginxLbTest/nginx_load_balancer/opt/tls:/etc/nginx/tls
+  nginxS11:
+    image: nginx:latest
+    container_name: nginxS11
+    restart: always
+    ports:
+      - 9043:443
+      - 9080:80
+    command:
+      - /bin/bash
+      - -c
+      - |
+        service nginx start 
+        while true ; do sleep 100; done;
+    networks:
+      consul:
+        ipv4_address: 192.168.172.13
+    volumes:
+      - /home/radu/IdeaProjects/nginx-consul/nginxLbTest/nginxS11/opt/nginx/nginx.conf:/etc/nginx/nginx.conf
+      - /home/radu/IdeaProjects/nginx-consul/nginxLbTest/opt/tls:/etc/nginx/tls
+  nginxS12:
+    image: nginx:latest
+    container_name: nginxS12
+    restart: always
+    ports:
+      - 9143:443
+      - 9180:80
+    command:
+      - /bin/bash
+      - -c
+      - |
+        service nginx start 
+        while true ; do sleep 100; done;
+    networks:
+      consul:
+        ipv4_address: 192.168.172.14
+    volumes:
+      - /home/radu/IdeaProjects/nginx-consul/nginxLbTest/nginxS12/opt/nginx/nginx.conf:/etc/nginx/nginx.conf
+      - /home/radu/IdeaProjects/nginx-consul/nginxLbTest/opt/tls:/etc/nginx/tls
+  nginxS21:
+    image: nginx:latest
+    container_name: nginxS21
+    restart: always
+    ports:
+      - 9243:443
+      - 9280:80
+    command:
+      - /bin/bash
+      - -c
+      - |
+        service nginx start 
+        while true ; do sleep 100; done;
+    networks:
+      consul:
+        ipv4_address: 192.168.172.15
+    volumes:
+      - /home/radu/IdeaProjects/nginx-consul/nginxLbTest/nginxS21/opt/nginx/nginx.conf:/etc/nginx/nginx.conf
+      - /home/radu/IdeaProjects/nginx-consul/nginxLbTest/opt/tls:/etc/nginx/tls
+  nginxS22:
+    image: nginx:latest
+    container_name: nginxS22
+    restart: always
+    ports:
+      - 9343:443
+      - 9380:80
+    command:
+      - /bin/bash
+      - -c
+      - |
+        service nginx start 
+        while true ; do sleep 100; done;
+    networks:
+      consul:
+        ipv4_address: 192.168.172.16
+    volumes:
+      - /home/radu/IdeaProjects/nginx-consul/nginxLbTest/nginxS22/opt/nginx/nginx.conf:/etc/nginx/nginx.conf
+      - /home/radu/IdeaProjects/nginx-consul/nginxLbTest/opt/tls:/etc/nginx/tls
+
+networks:
+  consul:
+    ipam:
+      driver: default
+      config:
+        - subnet: 192.168.172.0/24

@@ -1,0 +1,10 @@
+{
+  "service": {
+    "Name": "nginx-4",
+    "Port": 8500,
+    "check": {
+      "args": ["curl", "consul-server-4:8500"],
+      "interval": "3s"
+    }
+  }
+}

@@ -1,0 +1,84 @@
+version: '3'
+
+services:
+  consul-server-1:
+    image: consul:latest
+    container_name: consul-server-1
+    restart: always
+    ports:
+      - "9990:8500"
+      - "9991:8501"
+      - "9993:8600"
+    networks:
+      consul:
+        ipv4_address: 192.168.172.11
+    command: "agent -data-dir=/opt/consul-server/data -config-dir=/opt/consul-server/config -config-file=/opt/consul-server/config/consul-config-1.json"
+    volumes:
+      - /home/radu/IdeaProjects/nginx-consul/nginxConsulTempate/opt/consul-server/config/config-1:/opt/consul-server/config
+      - /home/radu/IdeaProjects/nginx-consul/nginxConsulTempate/opt/consul-server/data-1:/opt/consul-server/data
+      - /home/radu/IdeaProjects/nginx-consul/nginxConsulTempate/opt/consul-server/tls:/opt/consul-server/tls
+  consul-server-2:
+    image: consul:latest
+    container_name: consul-server-2
+    restart: always
+    ports:
+      - "9994:8500"
+      - "9995:8501"
+      - "9996:8600"
+    networks:
+      consul:
+        ipv4_address: 192.168.172.12
+    command: "agent -data-dir=/opt/consul-server/data -config-dir=/opt/consul-server/config -config-file=/opt/consul-server/config/consul-config-2.json"
+    volumes:
+      - /home/radu/IdeaProjects/nginx-consul/nginxConsulTempate/opt/consul-server/config/config-2:/opt/consul-server/config
+      - /home/radu/IdeaProjects/nginx-consul/nginxConsulTempate/opt/consul-server/data-2:/opt/consul-server/data
+      - /home/radu/IdeaProjects/nginx-consul/nginxConsulTempate/opt/consul-server/tls:/opt/consul-server/tls
+  consul-server-3:
+    image: consul:latest
+    container_name: consul-server-3
+    restart: always
+    networks:
+      consul:
+        ipv4_address: 192.168.172.13
+    ports:
+      - "9997:8500"
+      - "9998:8501"
+      - "9999:8600"
+    command: "agent -data-dir=/opt/consul-server/data -config-dir=/opt/consul-server/config -config-file=/opt/consul-server/config/consul-config-3.json"
+    volumes:
+      - /home/radu/IdeaProjects/nginx-consul/nginxConsulTempate/opt/consul-server/config/config-3:/opt/consul-server/config
+      - /home/radu/IdeaProjects/nginx-consul/nginxConsulTempate/opt/consul-server/data-3:/opt/consul-server/data
+      - /home/radu/IdeaProjects/nginx-consul/nginxConsulTempate/opt/consul-server/tls:/opt/consul-server/tls
+  nginx:
+    image: consul-nginx:latest
+    container_name: nginx
+    restart: always
+    ports:
+      - 9443:443
+      - 9500:8500
+      - 80:80
+    command:
+      - /bin/bash
+      - -c
+      - |
+        service nginx start 
+        /bin/rm /etc/nginx/nginx.conf
+        /usr/local/bin/consul agent -data-dir=/opt/consul-agent/nginx/data -config-dir=/opt/consul-agent/nginx/config -config-file=/opt/consul-agent/nginx/config/consul-config.json &
+        /usr/local/bin/consul-template -config=/opt/consul-agent/nginx/template/consul-template-config.hcl
+        while true ; do sleep 100; done;
+    networks:
+      consul:
+        ipv4_address: 192.168.172.14
+    volumes:
+      - /home/radu/IdeaProjects/nginx-consul/nginxConsulTempate/opt/consul-server/tls:/etc/nginx/tls
+      - /home/radu/IdeaProjects/nginx-consul/nginxConsulTempate/opt/nginx:/etc/nginx
+      - /home/radu/IdeaProjects/nginx-consul/nginxConsulTempate/opt/consul-agent/nginx/data:/opt/consul-agent/nginx/data
+      - /home/radu/IdeaProjects/nginx-consul/nginxConsulTempate/opt/consul-agent/nginx/config:/opt/consul-agent/nginx/config
+      - /home/radu/IdeaProjects/nginx-consul/nginxConsulTempate/opt/consul-agent/nginx/template:/opt/consul-agent/nginx/template
+
+networks:
+  consul:
+    ipam:
+      driver: default
+      config:
+        - subnet: 192.168.172.0/24
